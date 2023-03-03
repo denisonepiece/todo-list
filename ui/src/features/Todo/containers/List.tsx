@@ -1,17 +1,15 @@
-import { css } from '@emotion/react';
 import { Checkbox, List as AntList, Space } from 'antd';
-import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { MouseEventHandler, useState } from 'react';
+import { useState } from 'react';
 import AddForm from '../components/AddForm';
 import TodoDrawer from '../components/TodoDrawer';
 import {
   useAddTodoMutation,
-  useGetTodosQuery,
+  useGetTodoListQuery,
   useUpdateTodoMutation,
-} from '../services/todos';
+} from '../services/todo';
 
 function List() {
-  const { data } = useGetTodosQuery();
+  const { data } = useGetTodoListQuery();
   const [addTodo] = useAddTodoMutation();
   const [openTask, setOpenTask] = useState<number | null>(null);
   const [updateTodo] = useUpdateTodoMutation();

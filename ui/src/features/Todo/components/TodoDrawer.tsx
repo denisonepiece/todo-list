@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 import { Button, Drawer, DrawerProps, Input } from 'antd';
 import { useEffect, useState } from 'react';
-import {
-  useDeleteTodoMutation,
-  useGetTodoQuery,
-  useUpdateTodoMutation,
-} from '../services/todos';
+import { useDeleteTodoMutation, useGetTodoQuery } from '../services/todo';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Todo } from '../models';
 
@@ -18,6 +14,17 @@ const style = {
       border: none !important;
       box-shadow: none;
     }
+  `,
+  header: css`
+    & .ant-drawer-close {
+      display: none;
+    }
+  `,
+  body: css`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   `,
 };
 
@@ -41,6 +48,7 @@ function TodoDrawer({ id, onClose, updateTodo, ...props }: Props) {
     <Drawer
       onClose={onClose}
       open
+      css={style.header}
       {...props}
       title={
         <Input
@@ -53,10 +61,13 @@ function TodoDrawer({ id, onClose, updateTodo, ...props }: Props) {
         />
       }
     >
-      <Button
-        icon={<DeleteOutlined />}
-        onClick={() => deleteTodo(id).then(() => onClose())}
-      />
+      <div css={style.body}>
+        <Input.TextArea />
+        <Button
+          icon={<DeleteOutlined />}
+          onClick={() => deleteTodo(id).then(() => onClose())}
+        />
+      </div>
     </Drawer>
   );
 }

@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Todo } from '../models';
 
-export const todosApi = createApi({
-  reducerPath: 'todosApi',
+export const todoApi = createApi({
+  reducerPath: 'todoApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/todo/' }),
   tagTypes: ['Todo'],
   endpoints: (builder) => ({
-    getTodos: builder.query<Todo[], void>({
+    getTodoList: builder.query<Todo[], void>({
       query: () => '',
       providesTags: (result) =>
         result
@@ -48,9 +48,9 @@ export const todosApi = createApi({
 });
 
 export const {
-  useGetTodosQuery,
+  useGetTodoListQuery,
   useAddTodoMutation,
   useGetTodoQuery,
   useUpdateTodoMutation,
   useDeleteTodoMutation,
-} = todosApi;
+} = todoApi;

@@ -1,3 +1,1 @@
-# todo-list
-
-For test libs
+# Competitive todo

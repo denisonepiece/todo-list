@@ -1,7 +1,7 @@
 import List from './containers/List';
 
-function Todos() {
+function Todo() {
   return <List />;
 }
 
-export default Todos;
+export default Todo;
