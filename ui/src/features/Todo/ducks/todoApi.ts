@@ -1,13 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import api from '../../../api/rootApi';
 import { Todo } from '../models';
 
-export const todoApi = createApi({
-  reducerPath: 'todoApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/todo/' }),
-  tagTypes: ['Todo'],
+export const todoApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getTodoList: builder.query<Todo[], void>({
-      query: () => '',
+      query: () => ({ url: 'todo', method: 'GET' }),
       providesTags: (result) =>
         result
           ? [
@@ -17,29 +14,29 @@ export const todoApi = createApi({
           : [{ type: 'Todo', id: 'LIST' }],
     }),
     getTodo: builder.query<Todo, number>({
-      query: (id) => `${id}`,
+      query: (id) => ({ url: `todo/${id}`, method: 'GET' }),
     }),
     updateTodo: builder.mutation<void, Partial<Todo>>({
       query: ({ _id, ...otherProperties }) => ({
-        url: `${_id}`,
+        url: `todo/${_id}`,
         method: 'PUT',
-        body: {
+        data: {
           ...otherProperties,
         },
       }),
       invalidatesTags: [{ type: 'Todo', id: 'LIST' }],
     }),
     addTodo: builder.mutation<void, Partial<Todo>>({
-      query: (body) => ({
-        url: '',
+      query: (data) => ({
+        url: 'todo',
         method: 'POST',
-        body,
+        data,
       }),
       invalidatesTags: [{ type: 'Todo', id: 'LIST' }],
     }),
     deleteTodo: builder.mutation<void, number>({
       query: (id) => ({
-        url: `${id}`,
+        url: `todo/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'Todo', id: 'LIST' }],

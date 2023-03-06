@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Button, Drawer, DrawerProps, Input } from 'antd';
 import { useEffect, useState } from 'react';
-import { useDeleteTodoMutation, useGetTodoQuery } from '../services/todo';
+import { useDeleteTodoMutation, useGetTodoQuery } from '../ducks/todoApi';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Todo } from '../models';
 

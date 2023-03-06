@@ -1,10 +1,10 @@
-import Router from './components/Router';
-import Providers from './components/Providers';
+import Routes from './Routes';
+import Providers from './Providers';
 
 function App() {
   return (
     <Providers>
-      <Router />
+      <Routes />
     </Providers>
   );
 }

@@ -6,10 +6,10 @@ import {
   useAddTodoMutation,
   useGetTodoListQuery,
   useUpdateTodoMutation,
-} from '../services/todo';
+} from '../ducks/todoApi';
 
 function List() {
-  const { data } = useGetTodoListQuery();
+  const { data, isLoading } = useGetTodoListQuery();
   const [addTodo] = useAddTodoMutation();
   const [openTask, setOpenTask] = useState<number | null>(null);
   const [updateTodo] = useUpdateTodoMutation();
@@ -17,6 +17,7 @@ function List() {
   return (
     <Space direction="vertical">
       <AntList
+        loading={isLoading}
         size="large"
         dataSource={data}
         renderItem={({ _id, completed, title }) => (

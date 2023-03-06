@@ -1,16 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { todoApi } from '../features/Todo/services/todo';
+import rootMiddleware from './rootMiddleware';
+import rootReducer from './rootReducer';
+
+const reducer = combineReducers(rootReducer);
 
 const store = configureStore({
-  reducer: {
-    [todoApi.reducerPath]: todoApi.reducer,
-  },
+  reducer: reducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(todoApi.middleware),
+    getDefaultMiddleware().concat(rootMiddleware),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof reducer>;
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
